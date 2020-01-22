@@ -4,15 +4,18 @@
 int main()
 {
     sf::RenderWindow window (sf::VideoMode(900,900),"this is working");
-    sf::CircleShape shape(900.f);
-    shape.setFillColor(sf::Color::Blue);
+    sf::CircleShape shape(100.f,45);
+    shape.setPosition(40,34.5);
+    shape.setFillColor(sf::Color::Cyan);
+    shape.setOutlineColor(sf::Color::Magenta);
+    shape.setOutlineThickness(3.4);
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
-            /* code */
-            if (event.type== sf::Event::Closed)
+            
+            if (event.type == sf::Event::Closed)
             {
                 window.close();
             }
