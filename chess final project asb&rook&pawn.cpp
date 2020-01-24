@@ -38,8 +38,8 @@ void loadposition()
 			k++;
 		}
 }
-Vector2f blackpawnplace =f[8].getPosition();
-Vector2f whitepawnplace =f[16].getPosition();
+Vector2f blackpawnplace =f[8].getPosition();//a black pawn initial place
+Vector2f whitepawnplace =f[16].getPosition();//a white pawn initial place
 
 std::string tochessnote(Vector2f p)
 {
@@ -63,11 +63,11 @@ void move(std::string str)
 	Vector2f newpos = barkhord(str[4], str[5]);
 
 	for (int i = 0; i < 32; i++)
-		if (f[i].getPosition() == newpos)
+		if (newpos.x== (f[i].getPosition().x)&&newpos.y==f[i].getPosition().y)
 			f[i].setPosition(-100, -100);
 
 	for (int i = 0; i < 32; i++)
-		if (f[i].getPosition() == oldpos)
+		if ( oldpos.x== f[i].getPosition().x && oldpos.y== f[i].getPosition().y )
 			f[i].setPosition(newpos);
 }
 
@@ -264,14 +264,15 @@ int sarbaz(std::string str,std::string position[],int whiteOrBlack)
 		}//for black pawn
 		
 	}
-	if(whiteOrBlack)
-	{
-		if(positionypawn!=1)//if it is not in its initial place
+	if(whiteOrBlack==0)
+	{	
+		if(positionypawn!=1 )//if it is not in its initial place
 		{
 			if(nearelement > 2) nearelement=2;
 		}
 		int newx =newpos.x/size;
 		int newy =newpos.y/size;
+
 		if((newx-positionxpawn)== 1 || (newx-positionxpawn)==-1)// if hit possible
 		{
 			if (newy-positionypawn==1)
@@ -291,11 +292,11 @@ int sarbaz(std::string str,std::string position[],int whiteOrBlack)
 		}
 		if( (nearelement > newy-positionypawn) && (newy-positionypawn > 0))
 		{
-			if((newpos.x/size) == positionxpawn  )
+			if(newx == positionxpawn  )
 			{
 				return 1;
 			}
-			//return 0;
+			
 		}
 		
 
@@ -304,6 +305,7 @@ int sarbaz(std::string str,std::string position[],int whiteOrBlack)
 	{
 		int newx = newpos.x/size;
 		int newy = newpos.y/size;
+		
 		if(newx-positionxpawn== 1 || newx-positionxpawn==-1)// if hit is possible
 		{
 			if (newy-positionypawn == -1)
