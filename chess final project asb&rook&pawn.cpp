@@ -1,5 +1,5 @@
 ﻿#include<iostream>
-//#include<conio.h>
+//#include<conio.h>//my compiler do not execute this
 #include<string>
 #include <SFML/Graphics.hpp>
 #include <time.h>
