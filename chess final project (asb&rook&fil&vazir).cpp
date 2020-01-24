@@ -1,5 +1,5 @@
 ﻿#include<iostream>
-#include<conio.h>
+//#include<conio.h>
 #include<string>
 #include <SFML/Graphics.hpp>
 #include <time.h>
@@ -484,8 +484,8 @@ int main()
 	RenderWindow window(VideoMode(453, 453), "chess");
 
 	Texture t1,t2;
-	t1.loadFromFile("images/figures.png");
-	t2.loadFromFile("images/board0.png");
+	t1.loadFromFile("image/figures.png");
+	t2.loadFromFile("image/board0.png");
 
 	Sprite s(t1);
 	Sprite sboard(t2);

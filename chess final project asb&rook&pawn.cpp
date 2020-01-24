@@ -38,6 +38,8 @@ void loadposition()
 			k++;
 		}
 }
+Vector2f blackpawnplace =f[8].getPosition();
+Vector2f whitepawnplace =f[16].getPosition();
 
 std::string tochessnote(Vector2f p)
 {
@@ -240,7 +242,7 @@ int sarbaz(std::string str,std::string position[],int whiteOrBlack)
 		{
 			if ((positionx[i]==positionxpawn)&&(positiony[i]>positionypawn))
 			{
-				if ((positiony[i]-positionypawn)<nearelement)
+				if ((positiony[i]-positionypawn)< nearelement)
 				{
 					nearelement == (positiony[i]-positionypawn);
 				}
@@ -253,7 +255,7 @@ int sarbaz(std::string str,std::string position[],int whiteOrBlack)
 		{
 			if ((positionx[i]==positionxpawn) && (positiony[i] < positionypawn))
 			{
-				if ((-positiony[i]+positionypawn) < nearelement)
+				if ((positionypawn-positiony[i]) < nearelement)
 				{
 					nearelement == (positiony[i]-positionypawn);
 				}
@@ -270,7 +272,7 @@ int sarbaz(std::string str,std::string position[],int whiteOrBlack)
 		}
 		int newx =newpos.x/size;
 		int newy =newpos.y/size;
-		if(newx-positionxpawn== 1 || newx-positionxpawn==-1)// if hit possible
+		if((newx-positionxpawn)== 1 || (newx-positionxpawn)==-1)// if hit possible
 		{
 			if (newy-positionypawn==1)
 			{
@@ -293,18 +295,15 @@ int sarbaz(std::string str,std::string position[],int whiteOrBlack)
 			{
 				return 1;
 			}
-			return 0;
+			//return 0;
 		}
-		else
-		{
-			return 0;
-		}
+		
 
 	}
 	else
 	{
-		int newx =newpos.x/size;
-		int newy =newpos.y/size;
+		int newx = newpos.x/size;
+		int newy = newpos.y/size;
 		if(newx-positionxpawn== 1 || newx-positionxpawn==-1)// if hit is possible
 		{
 			if (newy-positionypawn == -1)
@@ -333,14 +332,11 @@ int sarbaz(std::string str,std::string position[],int whiteOrBlack)
 			{
 				return 1;
 			}
-			return 0;
+			
 		}
-		else
-		{
-			return 0;
-		}
+		
 	}
-	
+	return 0;
 	
 
 
