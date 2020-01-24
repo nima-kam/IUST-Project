@@ -1,5 +1,5 @@
 ﻿#include<iostream>
-#include<conio.h>
+//#include<conio.h>
 #include<string>
 #include <SFML/Graphics.hpp>
 #include <time.h>
@@ -34,6 +34,7 @@ void loadposition()
 			int y = n > 0 ? 1 : 0;
 			f[k].setTextureRect(IntRect(size*x, size*y, size, size));
 			f[k].setPosition(size*j, size*i);
+
 			k++;
 		}
 }
@@ -124,7 +125,7 @@ int rook(std::string str,std::string position[])
 	int NazdikXManfi;//نزدیک به رخ در محور ایکس از سمت منفی
 	int NazdikYMosbat;//نزدیک به رخ در محور ایگرگ از سمت مثبت
 	int NazdikYManfi;//نزدیک به رخ در محور ایگرگ از سمت منفی
-	int positionxrook=oldpos.x/size;
+	int positionxrook= oldpos.x / size;
 	int positionyrook = oldpos.y / size;
 
 	int i=0;
@@ -143,7 +144,7 @@ int rook(std::string str,std::string position[])
 	NazdikXManfi = -7;
 	for (i = 0; i < 32; i++)
 	{
-		if (positionx[i] < positionxrook&&positiony[i] == positionyrook)
+		if (positionx[i] < positionxrook && positiony[i] == positionyrook)
 		{
 			if (positionx[i] - positionxrook > NazdikXManfi)
 			{
@@ -204,14 +205,158 @@ int rook(std::string str,std::string position[])
 	}
 	return 0;*/
 }
+int sarbaz(std::string str,std::string position[],int whiteOrBlack)
+//if pawn is black put 0 and if it is white put 1.
+{
+	Vector2f oldpos = barkhord(str[0], str[1]);
+	Vector2f newpos = barkhord(str[4], str[5]);
+
+	Vector2f vectorPosition[32];
+	int positionxpawn= oldpos.x / size;
+	int positionypawn = oldpos.y / size;
+
+	for (int i = 0; i < 32; i++)
+	{
+		vectorPosition[i] = barkhord(position[i][0], position[i][1]);
+	}
+
+	int positionx[32];
+	for (int i = 0; i < 32; i++)
+	{
+		positionx[i] = vectorPosition[i].x/size;
+	}
+	
+	int positiony[32];
+	for (int i = 0; i < 32; i++)
+	{
+		positiony[i] = vectorPosition[i].y/size;
+	}
+
+	int nearelement=3;//range of movment of pawn
+
+	for (int i = 0; i < 32; i++)
+	{
+		if(whiteOrBlack)
+		{
+			if ((positionx[i]==positionxpawn)&&(positiony[i]>positionypawn))
+			{
+				if ((positiony[i]-positionypawn)<nearelement)
+				{
+					nearelement == (positiony[i]-positionypawn);
+				}
+
+		
+
+			}
+		}//for white pawn
+		else
+		{
+			if ((positionx[i]==positionxpawn) && (positiony[i] < positionypawn))
+			{
+				if ((-positiony[i]+positionypawn) < nearelement)
+				{
+					nearelement == (positiony[i]-positionypawn);
+				}
+			}
+
+		}//for black pawn
+		
+	}
+	if(whiteOrBlack)
+	{
+		if(positionypawn!=1)//if it is not in its initial place
+		{
+			if(nearelement > 2) nearelement=2;
+		}
+		int newx =newpos.x/size;
+		int newy =newpos.y/size;
+		if(newx-positionxpawn== 1 || newx-positionxpawn==-1)// if hit possible
+		{
+			if (newy-positionypawn==1)
+			{
+				for (int i = 0; i < 32; i++)
+				{
+					if (positionx[i]==newx && positiony[i]==newy)
+					{
+						return 1;
+					}
+					
+				}
+				
+			}
+				
+
+		}
+		if( (nearelement > newy-positionypawn) && (newy-positionypawn > 0))
+		{
+			if((newpos.x/size) == positionxpawn  )
+			{
+				return 1;
+			}
+			return 0;
+		}
+		else
+		{
+			return 0;
+		}
+
+	}
+	else
+	{
+		int newx =newpos.x/size;
+		int newy =newpos.y/size;
+		if(newx-positionxpawn== 1 || newx-positionxpawn==-1)// if hit is possible
+		{
+			if (newy-positionypawn == -1)
+			{
+				for (int i = 0; i < 32; i++)
+				{
+					if (positionx[i] == newx && positiony[i] == newy)
+					{
+						return 1;
+					}
+					
+				}
+				
+			}
+				
+
+		}
+		if(positionypawn!=6)//if it is not in its initial place
+		{
+			if(nearelement > 2) nearelement=2;
+		}
+		
+		if( (nearelement > -((newpos.y/size)-positionypawn)) && ((newpos.y/size)-positionypawn < 0))
+		{
+			if((newpos.x/size) == positionxpawn  )
+			{
+				return 1;
+			}
+			return 0;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	
+
+
+
+
+}
+
+
 
 int main()
 {
 	RenderWindow window(VideoMode(453, 453), "chess");
 
 	Texture t1,t2;
-	t1.loadFromFile("images/figures.png");
-	t2.loadFromFile("images/board0.png");
+	t1.loadFromFile("image/figures.png");
+	t2.loadFromFile("image/board0.png");
 
 	Sprite s(t1);
 	Sprite sboard(t2);
@@ -283,7 +428,7 @@ int main()
 						}
 					}
 
-					std::string position[32];
+					std::string position[32];//position of all elements
 					for (int y = 0; y < 32; y++)
 					{
 						Vector2f mogeiat = f[y].getPosition();
@@ -303,6 +448,36 @@ int main()
 							f[n].setPosition(oldpos);
 						}
 					}
+					if(n==16||n==17||n==18||n==19||n==20||n==21||n==22||n==23)
+					{
+						int a = sarbaz(str, position,1);
+						if (a == 1)
+						{
+							std::cout << str << "\n";
+							f[n].setPosition(newpos);
+						}
+						else
+						{
+							std::cout << "Wrong Move\n";
+							f[n].setPosition(oldpos);
+						}
+					}
+					if(n==8||n==9||n==10||n==11||n==12||n==13||n==14||n==15)
+					{
+						int a = sarbaz(str, position,0);
+						if (a == 1)
+						{
+							std::cout << str << "\n";
+							f[n].setPosition(newpos);
+						}
+						else
+						{
+							std::cout << "Wrong Move\n";
+							f[n].setPosition(oldpos);
+						}
+
+					}
+
 					//std::cout << str << "\n";
 					//f[n].setPosition(newpos);
 				}
