@@ -1371,7 +1371,13 @@ int main()
 //start page. 
 	RenderWindow start(VideoMode(501,503),"chess start menu");
 	
-	Texture background,starticon;
+	Texture background,starticon,axe,armor;
+
+    starticon.setSmooth(true);
+    
+    axe.loadFromFile("image/axe.png");
+
+    armor.loadFromFile("image/armor.png");
 
 	background.loadFromFile("image/woodenbackground.jpg");
 	
@@ -1381,12 +1387,39 @@ int main()
 
 	back.setScale(0.5,0.5);
 	
-	Sprite iconstart(starticon);
+	Sprite iconstart(starticon);//start icon
 
 	iconstart.setPosition(100,272);
+
+    Sprite axeiconr(axe);//axes in the background.
+    
+    axeiconr.setScale(1,0.81);
+
+    axeiconr.rotate(40);
+    
+    axeiconr.setPosition(235,30);   
+
+    Sprite axeiconl(axe);
+
+    axeiconl.rotate(-40);
 	
-	Vector2f startposition = iconstart.getPosition();
-	
+    axeiconl.setScale(1,0.80);
+
+    axeiconl.setPosition(8,87);
+
+    Sprite armorI(armor);//armor in background
+
+    armorI.setPosition(310,120);
+
+	Vector2f startposition = iconstart.getPosition();//start icon position.
+
+    SoundBuffer press;
+    
+    press.loadFromFile("audio/start pressed.wav");
+
+    Sound spress(press);
+
+    int isclose = 0;
 	
 	while (start.isOpen())
 	{
@@ -1395,6 +1428,21 @@ int main()
 		
 		Vector2i pos = Mouse::getPosition(start);//position of mouse
 
+        if (pos.x-startposition.x>0&&pos.x-startposition.x<100)//if mouse was on start icon.
+		{
+			if ((pos.y-startposition.y) > 0 && (pos.y - startposition.y) < 100)
+			{
+                
+                iconstart.setScale(1.1,1.1);
+            }  		
+        
+    
+        }
+        else
+        {
+            iconstart.setScale(1,1);
+        }
+        
 		Event state;
 		while (start.pollEvent(state))
 		{
@@ -1404,6 +1452,7 @@ int main()
 			switch (state.type)
 			{
 			case Event::Closed :
+                isclose=1;    
 
 				start.close();
 
@@ -1417,7 +1466,9 @@ int main()
 			    	{
 			    		if ((pos.y-startposition.y) > 0 && (pos.y - startposition.y) < 100)
 			    		{
-			    			start.close();
+			    			spress.Sound::play();
+
+                            start.close();
 			    		}
 					
 			    	}
@@ -1432,11 +1483,19 @@ int main()
 
 		}
 		start.clear(Color::Black);
-		start.draw(back);
+		
+        start.draw(back);
+
 		start.draw(iconstart);
+        
+        start.draw(axeiconr);
 
+        start.draw(axeiconl);
 
-		start.display();
+        start.draw(armorI);
+
+        start.display();
+
 	}
 	
 	// game window 
@@ -1490,6 +1549,11 @@ int main()
 	while (window.isOpen())
 
 	{
+        if (isclose)//close the window if exit clicked in start menu.
+        {
+            window.close();
+        }
+        
 
 		Vector2i pos = Mouse::getPosition(window);
 
