@@ -6,6 +6,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include<SFML/Audio.hpp>//for playing sounds
+
 #include <time.h>
 
 using namespace sf;
@@ -1400,9 +1402,9 @@ int main()
 
 	Texture t1, t2;
 
-	t1.loadFromFile("images/figures.png");
+	t1.loadFromFile("image/figures.png");
 
-	t2.loadFromFile("images/board0.png");
+	t2.loadFromFile("image/board0.png");
 
 
 

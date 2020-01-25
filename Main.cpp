@@ -30,7 +30,7 @@ std::string tochessnote(Vector2f p)
 	return s;
 }
 
-void loadposition()
+void loadposition(void)
 {
 	int k = 0;
 	for(int i=0;i<8;i++)
@@ -70,11 +70,12 @@ void move(std::string str)
 
 int main()
 {
-	RenderWindow window(VideoMode(453, 453), "chess");
+	RenderWindow window(VideoMode(453, 453), "chess") ;
 
-	Texture t1,t2;
-	t1.loadFromFile("image/figures.png");
-	t2.loadFromFile("image/board0.png");
+	sf::Texture t1 ;
+	sf::Texture t2 ;
+	t1.loadFromFile("image/figures.png") ;
+	t2.loadFromFile("image/board0.png") ;
 
 	Sprite s(t1);
 	Sprite sboard(t2);
@@ -125,7 +126,7 @@ int main()
 				}
 					
 		}
-		if (isMove) f[n].setPosition(pos.x - dx, pos.y - dy);
+		if(isMove) f[n].setPosition(pos.x - dx, pos.y - dy);
 
 		window.clear();
 		window.draw(sboard);
