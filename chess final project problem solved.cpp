@@ -1326,17 +1326,9 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 
 					}
 
-
-
 				}
 
-
-
 			}
-
-
-
-
 
 		}
 
@@ -1348,8 +1340,6 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 
 		}
 
-
-
 		if ((nearelement > -((newpos.y / size) - positionypawn)) && ((newpos.y / size) - positionypawn < 0))
 
 		{
@@ -1359,32 +1349,15 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 			{
 
 				return 1;
-
 			}
 
-
-
 		}
-
-
 
 	}
 
 	return 0;
 
-
-
-
-
-
-
-
-
-
-
 }
-
-
 
 
 
@@ -1400,9 +1373,9 @@ int main()
 
 	Texture t1, t2;
 
-	t1.loadFromFile("images/figures.png");
+	t1.loadFromFile("image/figures.png");
 
-	t2.loadFromFile("images/board0.png");
+	t2.loadFromFile("image/board0.png");
 
 
 
