@@ -2454,10 +2454,30 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 			if (nearelement > 2) nearelement = 2;
 
 		}
-
 		int newx = newpos.x / size;
 
 		int newy = newpos.y / size;
+
+		if (newx == positionxpawn)//pawn do not hit front of itself.**
+		{
+			if (  positionypawn - newy == -1)
+			{
+				for (int i = 0; i < 32; i++)
+
+				{
+
+					if (positionx[i] == newx && positiony[i] == newy)
+
+					{
+
+						return 0;
+
+					}
+				}
+			}
+			
+		}
+
 
 
 		if ((newx - positionxpawn) == 1 || (newx - positionxpawn) == -1)// if hit possible
@@ -2468,13 +2488,14 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 
 			{
 
-				for (int i = 0; i < 32; i++)
+				for (int i = 15; i < 32; i++)//just white
 
 				{
 
 					if (positionx[i] == newx && positiony[i] == newy)
 
 					{
+						//std::cout<<i<<"#"<<positionx[i]<<"X Y"<<positiony[i]<<std::endl;
 
 						return 1;
 
@@ -2513,7 +2534,7 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 
 	}
 
-	else
+	else//white 
 
 	{
 
@@ -2550,8 +2571,9 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 			if (newy - positionypawn == -1)
 
 			{
+				int x=0;
 
-				for (int i = 0; i < 32; i++)
+				for (int i = 0; i < 17; i++)
 
 				{
 
@@ -2559,10 +2581,15 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 
 					{
 
-						return 1;
+						x= 1;
 
 					}
 				}
+				if (x==1)
+				{
+					return 1;
+				}
+				
 
 			}
 
@@ -2956,6 +2983,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -2993,6 +3021,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3026,6 +3055,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3057,6 +3087,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3088,6 +3119,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3121,6 +3153,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3154,6 +3187,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3168,6 +3202,7 @@ int main()
 							std::cout << "Wrong Move\n";
 
 							f[n].setPosition(oldpos);
+							FAILURE.Sound::play();
 
 						}
 					}
