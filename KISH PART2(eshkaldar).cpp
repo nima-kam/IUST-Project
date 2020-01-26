@@ -5,6 +5,7 @@
 #include<string>
 
 #include <SFML/Graphics.hpp>
+#include<SFML/Audio.hpp>
 
 #include <time.h>
 
@@ -2613,18 +2614,184 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 int main()
 
 {
+//start page. 
+
+	RenderWindow start(VideoMode(501,503),"chess start menu");
+	
+	Texture background,starticon,axe,armor,setting;
+
+	setting.setSmooth(true);
+
+    starticon.setSmooth(true);
+    
+    axe.loadFromFile("image/axe.png");
+
+    armor.loadFromFile("image/armor.png");
+
+	background.loadFromFile("image/woodenbackground.jpg");
+	
+	starticon.loadFromFile("image/horse.png");
+
+	Sprite back(background);
+
+	back.setScale(0.5,0.5);
+	
+	Sprite iconstart(starticon);//start icon
+
+	iconstart.setPosition(100,272);
+
+    Sprite axeiconr(axe);//axes in the background.
+    
+    axeiconr.setScale(1,0.81);
+
+    axeiconr.rotate(40);
+    
+    axeiconr.setPosition(235,30);   
+
+    Sprite axeiconl(axe);
+
+    axeiconl.rotate(-40);
+	
+    axeiconl.setScale(1,0.80);
+
+    axeiconl.setPosition(8,87);
+
+    Sprite armorI(armor);//armor in background
+
+    armorI.setPosition(310,120);
+
+	Vector2f startposition = iconstart.getPosition();//start icon position.
+
+    SoundBuffer press;
+    
+    press.loadFromFile("audio/start pressed.wav");
+
+    Sound spress(press);
+	
+	Font h;//loading font.
+
+	h.loadFromFile("font/Hey Milenia Demo.otf");
+
+	Text queen(" queen ",h,40);//set a text.
+
+	Text rookh("rook",h,40);
+
+	Text knight("knight ",h,40);
+
+	Text bishop("bishop",h,40);
+
+    int isclose = 0;
+	
+	while (start.isOpen())
+	{
+		start.setFramerateLimit(60);
+		
+		Vector2i pos = Mouse::getPosition(start);//position of mouse
+
+        if (pos.x-startposition.x>0&&pos.x-startposition.x<100)//if mouse was on start icon.
+		{
+			if ((pos.y-startposition.y) > 0 && (pos.y - startposition.y) < 100)
+			{
+                
+                iconstart.setScale(1.1,1.1);
+            }  		
+
+			else
+			{
+				iconstart.setScale(1,1);
+			}
+			
+    
+        }
+        else
+        {
+	
+            iconstart.setScale(1,1);
+        }
+        
+		Event state;
+		while (start.pollEvent(state))
+		{
+			
+
+				
+			switch (state.type)
+			{
+			case Event::Closed :
+				//RenderWindow exitQ(VideoMode(200,100)," exit ");
+				
+                isclose=1;    
+
+				start.close();
+
+				break;
+			
+			case Event::MouseButtonPressed :
+			    if (state.key.code == Mouse::Left)
+			    {
+				
+			    	if (pos.x-startposition.x>0&&pos.x-startposition.x<100)
+			    	{
+			    		if ((pos.y-startposition.y) > 0 && (pos.y - startposition.y) < 100)
+			    		{
+			    			spress.Sound::play();
+
+                            start.close();
+			    		}
+					
+			    	}
+				
+			    }
+                break;
+				
+			default:
+
+				break;
+			}
+
+		}
+		start.clear(Color::Black);
+		
+        start.draw(back);
+
+		start.draw(iconstart);
+        
+        start.draw(axeiconr);
+
+        start.draw(axeiconl);
+
+        start.draw(armorI);
+
+		//start.draw(t);
+        start.display();
+
+	}
+	
+	// game window 
 
 	RenderWindow window(VideoMode(453, 453), "chess");
 
+    SoundBuffer footstep,wrong;
 
+    footstep.loadFromFile("audio/footsteps.wav");
+    
+    wrong.loadFromFile("audio/wrongmove.wav");
+
+    Sound FAILURE;
+
+    Sound movement;
+
+    FAILURE.setBuffer(wrong);
+
+    movement.setBuffer(footstep);
+
+   // movement.Sound::play();//for playing a sound
 
 	Texture t1, t2;
 
-	t1.loadFromFile("images/figures.png");
+	t1.loadFromFile("image/figures.png");
 
-	t2.loadFromFile("images/board0.png");
-
-
+	t2.loadFromFile("image/board0.png");
 
 	Sprite s(t1);
 
