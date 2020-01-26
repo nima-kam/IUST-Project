@@ -2446,6 +2446,8 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 	if (whiteOrBlack == 0)//black
 
 	{
+		
+		
 
 		if (positionypawn != 1)//if it is not in its initial place
 
@@ -2628,22 +2630,175 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 	return 0;
 
 
+}
 
 
+Texture sh,ro[2],qu[2],bi[2],kn[2];//photo of elements.
+
+void setSh()
+{
+	sh.loadFromFile("image/figures.png");
+for (int i = 0; i < 2; i++)
+{
+	ro[i].loadFromFile("image/figures.png",IntRect(size*0, size*i, size, size));
+	qu[i].loadFromFile("image/figures.png",IntRect(size*3, size*i, size, size));
+	bi[i].loadFromFile("image/figures.png",IntRect(size*2, size*i, size, size));
+	kn[i].loadFromFile("image/figures.png",IntRect(size*1, size*i, size, size));
+	
+}
+
+	
+}
 
 
+int changeshape(Sprite pawn,int number,int n)/*gets the pawn sprite and change it to another shape. 
+ put number 1 if it is white and 0 for black*/ 
+{
+	
+	Font h;//loading font.
+
+	h.loadFromFile("font/Hey Milenia Demo.otf");
+
+	Text question("which one do you want to add in game :",h,40) ;
+    question.setStyle(Text::Bold);
+	
+	question.setPosition(15,15);
+	question.setColor(Color::Green);
+
+	Text queen(" queen ",h,40);//set a text.
+
+	queen.setPosition(25,150);
+
+	Text rook("rook",h,40);
+
+	rook.setPosition(25,300);
+
+	Text knight("knight ",h,40);
+
+	knight.setPosition(225,150);
+
+	Text bishop("bishop",h,40); 
+
+	bishop.setPosition(225,300);
+
+	int shape ;
+	RenderWindow q(VideoMode(602,400),"* change *");
+	
+	while (q.isOpen())
+	{
+		Vector2i pos = Mouse::getPosition(q);//position of mouse
+		Event w;
+		while (q.pollEvent(w))
+		{
+			if (w.type == Event::MouseButtonPressed)
+			{
+				if (w.key.code == Mouse::Left)
+				{
+
+        		if (pos.x-25>0&&pos.x-25<100)//if mouse was on queen icon.
+				{
+					if ((pos.y-150) > 0 && (pos.y - 150) < 100)
+					{
+						shape=1;//queen
+						
+						sleep(seconds(0.5));
+						q.close();
+
+					}
+
+				}
+				if (pos.x-25>0&&pos.x-25<100)//if mouse was on rook icon.
+				{
+					if ((pos.y-300) > 0 && (pos.y - 300) < 100)
+					{
+						shape=2;//rook
+						
+
+						sleep(seconds(0.5));
+						q.close();
+
+					}
+
+				}
+
+				if (pos.x-225>0&&pos.x-225<100)//if mouse was on knight icon.
+				{
+					if ((pos.y-150) > 0 && (pos.y - 150) < 100)
+					{
+						shape=3;//knight
+						
+
+						sleep(seconds(0.5));
+						q.close();
+
+					}
+
+				}
+				if (pos.x-225>0&&pos.x-225<100)//if mouse was on bishop icon.
+				{
+					if ((pos.y-300) > 0 && (pos.y - 300) < 100)
+					{
+						shape=4;//bishop
+						
+
+						sleep(seconds(0.5));
+						q.close();
+
+					}
+
+				}	
+
+				}
+
+				
+			}
+			
 
 
+		}
+		
 
+		q.clear(Color::Magenta);
 
+		q.draw(question);
+		q.draw(queen);
+		q.draw(rook);
+		q.draw(bishop); 
+		q.draw(knight);
+
+		q.display();
+std::cout<<"#"<<shape<<" #"<<"\n";
+	}
+	switch (shape)
+		{
+		case 1:
+			f[n].setTexture(qu[number]);
+			return 1;
+			break;
+		case 2:
+ 			f[n].setTexture(ro[number]);
+			 return 2;
+		  	break;
+		case 3:
+			f[n].setTexture(kn[number]);
+			return 3;
+		  	break;
+		case 4:
+		 	pawn.setTexture(bi[number]);
+			return 4;
+		  	break;
+		
+		default:
+			break;
+		}
+
+return shape;
 
 }
 
 
-
-
-
-
+int shapeb[8]={0};
+int shape[8]={0};
 
 int main()
 
@@ -2864,28 +3019,6 @@ int main()
         }
 
 		Vector2i pos = Mouse::getPosition(window);
-
-
-
-		/*std::string position[32];
-
-		for (int y = 0; y < 32; y++)
-
-		{
-
-		Vector2f mogeiat = f[y].getPosition();
-
-		position[y] = tochessnote(mogeiat);
-
-		}
-
-		/*for (int y = 0; y < 32; y++)
-
-		{
-
-		std::cout << position[y] << "\n";
-
-		}*/
 
 
 
@@ -3127,9 +3260,31 @@ int main()
 
 							if (n == 16 || n == 17 || n == 18 || n == 19 || n == 20 || n == 21 || n == 22 || n == 23)
 
-							{
+							{int a;
+								//shape of pawns after and before reaching end
+								switch (shape[n-16])
+								{
+								case 0: a = sarbaz(str, position, 1);
+									
+									break;
+								case 1: a = vazir(str, position);
+									
+									break;
+								case 2: a = rook(str, position);
+									
+									break;
+								case 3: a = asb(str,position,n);
+									
+									break;	
+								case 4: a = fil(str, position);
+									
+									break;
 
-								int a = sarbaz(str, position, 1);
+								}
+								
+
+								//int x=0;
+
 
 								if (a == 1)
 
@@ -3143,8 +3298,13 @@ int main()
 									movement.Sound::play();
 
 									CounterOfMovement++;
-
+									if (newpos.y< size)
+									{
+										a=2;
+									}
+									
 								}
+								
 
 								else
 
@@ -3156,7 +3316,13 @@ int main()
 									FAILURE.Sound::play();
 
 								}
+								if(a==2)
+								{
+									shape[n-16]=changeshape(f[n],1,n);//
 
+									
+								}
+								std::cout<<shape[n-16]<<"# \n";
 							}
 
 							if (n == 8 || n == 9 || n == 10 || n == 11 || n == 12 || n == 13 || n == 14 || n == 15)
