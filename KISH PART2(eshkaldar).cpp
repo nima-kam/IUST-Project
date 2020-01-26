@@ -2361,7 +2361,7 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 
 	int positionx[32];
 
-	for (int i = 0; i < 32; i++)
+	for (int i = 0; i < 32; i++)//x of other elements
 
 	{
 
@@ -2443,7 +2443,7 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 
 	}
 
-	if (whiteOrBlack == 0)
+	if (whiteOrBlack == 0)//black
 
 	{
 
@@ -2458,7 +2458,6 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 		int newx = newpos.x / size;
 
 		int newy = newpos.y / size;
-
 
 
 		if ((newx - positionxpawn) == 1 || (newx - positionxpawn) == -1)// if hit possible
@@ -2512,9 +2511,6 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 		}
 
 
-
-
-
 	}
 
 	else
@@ -2546,18 +2542,9 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 						return 1;
 
 					}
-
-
-
 				}
 
-
-
 			}
-
-
-
-
 
 		}
 
@@ -2767,7 +2754,7 @@ int main()
 
 	}
 	
-	// game window 
+	// game window ****
 
 	RenderWindow window(VideoMode(453, 453), "chess");
 
@@ -2866,11 +2853,6 @@ int main()
 				window.close();
 
 
-
-
-
-
-
 			if (e.type == Event::MouseButtonPressed)
 
 				if (e.key.code == Mouse::Left)
@@ -2907,8 +2889,8 @@ int main()
 
 					str = tochessnote(oldpos) + "->" + tochessnote(newpos);
 
-
-
+				if(tochessnote(oldpos)!=tochessnote(newpos))//if the position changed
+				{
 					static int CounterOfMovement = 1;
 
 					if (CounterOfMovement % 2 == 1)
@@ -3437,6 +3419,17 @@ int main()
 							FAILURE.Sound::play();
 						}
 					}
+				}
+				else
+				{
+					std::cout << "Wrong Move\n";
+
+					f[n].setPosition(oldpos);
+					
+					FAILURE.Sound::play();
+				}
+				
+
 
 					/*if (n == 1 || n == 6 || n == 25 || n == 30)
 
@@ -3651,7 +3644,7 @@ int main()
 					//std::cout << str << "\n";
 
 					//f[n].setPosition(newpos);
-
+										
 				}
 
 
