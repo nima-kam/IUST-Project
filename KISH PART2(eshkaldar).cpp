@@ -2521,9 +2521,29 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 
 		int newy = newpos.y / size;
 
+		if (newx == positionxpawn)//pawn do not hit front of itself.**
+		{
+			if (  positionypawn - newy == 1)
+			{
+				for (int i = 0; i < 32; i++)
+
+				{
+
+					if (positionx[i] == newx && positiony[i] == newy)
+
+					{
+
+						return 0;
+
+					}
+				}
+			}
+			
+		}
+		
 
 
-		if (newx - positionxpawn == 1 || newx - positionxpawn == -1)// if hit is possible
+		if (newx - positionxpawn == 1 || newx - positionxpawn == (-1))// if hit is possible
 
 		{
 
@@ -3425,7 +3445,7 @@ int main()
 					std::cout << "Wrong Move\n";
 
 					f[n].setPosition(oldpos);
-					
+
 					FAILURE.Sound::play();
 				}
 				
