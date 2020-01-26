@@ -12,18 +12,11 @@
 
 using namespace sf;
 
-
-
 int size = 56;
-
-
 
 Sprite f[32];
 
-
-
 int board[8][8] =
-
 {
 
 	-1,-2,-3,-4,-5,-3,-2,-1,
@@ -44,12 +37,7 @@ int board[8][8] =
 
 };
 
-
-
-
-
 void loadposition()
-
 {
 
 	int k = 0;
@@ -94,10 +82,6 @@ std::string tochessnote(Vector2f p)
 
 }
 
-
-
-
-
 Vector2f barkhord(char a, char b)
 
 {
@@ -109,8 +93,6 @@ Vector2f barkhord(char a, char b)
 	return Vector2f(x*size, y*size);
 
 }
-
-
 
 void move(std::string str)
 
@@ -137,8 +119,6 @@ void move(std::string str)
 			f[i].setPosition(newpos);
 
 }
-
-
 
 int asb(std::string str)
 
@@ -1357,6 +1337,12 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 
 	}
 
+
+
+
+
+	
+
 	return 0;
 
 }
@@ -1369,9 +1355,12 @@ int main()
 
 {
 //start page. 
+
 	RenderWindow start(VideoMode(501,503),"chess start menu");
 	
-	Texture background,starticon,axe,armor;
+	Texture background,starticon,axe,armor,setting;
+
+	setting.setSmooth(true);
 
     starticon.setSmooth(true);
     
@@ -1418,13 +1407,24 @@ int main()
     press.loadFromFile("audio/start pressed.wav");
 
     Sound spress(press);
+	
+	Font h;//loading font.
+
+	h.loadFromFile("font/Hey Milenia Demo.otf");
+
+	Text queen(" queen ",h,40);//set a text.
+
+	Text rookh("rook",h,40);
+
+	Text knight("knight ",h,40);
+
+	Text bishop("bishop",h,40);
 
     int isclose = 0;
 	
 	while (start.isOpen())
 	{
 		start.setFramerateLimit(60);
-		//std::cout<< startposition.x <<" :x,y: "<<startposition.y;
 		
 		Vector2i pos = Mouse::getPosition(start);//position of mouse
 
@@ -1435,11 +1435,17 @@ int main()
                 
                 iconstart.setScale(1.1,1.1);
             }  		
-        
+
+			else
+			{
+				iconstart.setScale(1,1);
+			}
+			
     
         }
         else
         {
+	
             iconstart.setScale(1,1);
         }
         
@@ -1452,6 +1458,8 @@ int main()
 			switch (state.type)
 			{
 			case Event::Closed :
+				//RenderWindow exitQ(VideoMode(200,100)," exit ");
+				
                 isclose=1;    
 
 				start.close();
@@ -1494,6 +1502,7 @@ int main()
 
         start.draw(armorI);
 
+		//start.draw(t);
         start.display();
 
 	}
@@ -1791,7 +1800,7 @@ int main()
 							}
 
 							if (n == 16 || n == 17 || n == 18 || n == 19 || n == 20 || n == 21 || n == 22 || n == 23)
-
+							//white pawn
 							{
 
 								int a = sarbaz(str, position, 1);
