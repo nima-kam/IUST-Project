@@ -41,9 +41,6 @@ Sprite f[32];
 
 
 
-
-
-
 int board[8][8] =
 
 

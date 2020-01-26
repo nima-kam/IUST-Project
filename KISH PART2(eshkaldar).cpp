@@ -2446,8 +2446,6 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 	if (whiteOrBlack == 0)//black
 
 	{
-		
-		
 
 		if (positionypawn != 1)//if it is not in its initial place
 
@@ -2480,18 +2478,12 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 			
 		}
 
-
-
 		if ((newx - positionxpawn) == 1 || (newx - positionxpawn) == -1)// if hit possible
 
 		{
-
 			if (newy - positionypawn == 1)
-
 			{
-
 				for (int i = 15; i < 32; i++)//just white
-
 				{
 
 					if (positionx[i] == newx && positiony[i] == newy)
@@ -2500,37 +2492,21 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 						//std::cout<<i<<"#"<<positionx[i]<<"X Y"<<positiony[i]<<std::endl;
 
 						return 1;
-
 					}
-
-
-
 				}
-
-
-
 			}
-
-
-
-
 
 		}
 
 		if ((nearelement > newy - positionypawn) && (newy - positionypawn > 0))
 
 		{
-
 			if (newx == positionxpawn)
-
 			{
 
 				return 1;
 
 			}
-
-
-
 		}
 
 
@@ -2574,15 +2550,10 @@ int sarbaz(std::string str, std::string position[], int whiteOrBlack)
 
 			{
 				int x=0;
-
 				for (int i = 0; i < 17; i++)
-
 				{
-
 					if (positionx[i] == newx && positiony[i] == newy)
-
 					{
-
 						x= 1;
 
 					}
@@ -3652,219 +3623,6 @@ int main()
 				
 
 
-					/*if (n == 1 || n == 6 || n == 25 || n == 30)
-
-					{
-
-					int a = asb(str);
-
-					if (a == 1)
-
-					{
-
-					std::cout << str << "\n";
-
-					f[n].setPosition(newpos);
-
-					}
-
-					else {
-
-					std::cout << "Wrong Move\n";
-
-					f[n].setPosition(oldpos);
-
-					}
-
-					}
-
-
-
-					std::string position[32];//برای موقعیت یابی مهره ها که چئن بدرد اسب نمیخورد از اینحا کدش رو زدم
-
-					for (int y = 0; y < 32; y++)
-
-					{
-
-					Vector2f mogeiat = f[y].getPosition();
-
-					position[y] = tochessnote(mogeiat);
-
-					}
-
-					if (n == 0 || n == 7 || n == 24 || n == 31)
-
-					{
-
-					int a = rook(str, position);
-
-					if (a == 1)
-
-					{
-
-					std::cout << str << "\n";
-
-					f[n].setPosition(newpos);
-
-					}
-
-					else
-
-					{
-
-					std::cout << "Wrong Move\n";
-
-					f[n].setPosition(oldpos);
-
-					}
-
-					}
-
-					if (n == 2 || n == 5 || n == 26 || n == 29)
-
-					{
-
-					int a = fil(str, position);
-
-					if (a == 1)
-
-					{
-
-					std::cout << str << "\n";
-
-					f[n].setPosition(newpos);
-
-					}
-
-					else
-
-					{
-
-					std::cout << "Wrong Move\n";
-
-					f[n].setPosition(oldpos);
-
-					}
-
-					}
-
-					if (n == 3 || n == 27)
-
-					{
-
-					int a = vazir(str, position);
-
-					if (a == 1)
-
-					{
-
-					std::cout << str << "\n";
-
-					f[n].setPosition(newpos);
-
-					}
-
-					else {
-
-					std::cout << "Wrong Move\n";
-
-					f[n].setPosition(oldpos);
-
-					}
-
-					}
-
-					if (n == 28 || n == 4)
-
-					{
-
-					int a = king(str, position);
-
-					if (a == 1)
-
-					{
-
-					std::cout << str << "\n";
-
-					f[n].setPosition(newpos);
-
-					}
-
-					else {
-
-					std::cout << "Wrong Move\n";
-
-					f[n].setPosition(oldpos);
-
-					}
-
-					}
-
-					if (n == 16 || n == 17 || n == 18 || n == 19 || n == 20 || n == 21 || n == 22 || n == 23)
-
-					{
-
-					int a = sarbaz(str, position, 1);
-
-					if (a == 1)
-
-					{
-
-					std::cout << str << "\n";
-
-					f[n].setPosition(newpos);
-
-					}
-
-					else
-
-					{
-
-					std::cout << "Wrong Move\n";
-
-					f[n].setPosition(oldpos);
-
-					}
-
-					}
-
-					if (n == 8 || n == 9 || n == 10 || n == 11 || n == 12 || n == 13 || n == 14 || n == 15)
-
-					{
-
-					int a = sarbaz(str, position, 0);
-
-					if (a == 1)
-
-					{
-
-					std::cout << str << "\n";
-
-					f[n].setPosition(newpos);
-
-					}
-
-					else
-
-					{
-
-					std::cout << "Wrong Move\n";
-
-					f[n].setPosition(oldpos);
-
-					}
-
-
-
-					}*/
-
-
-
-
-
-					//std::cout << str << "\n";
-
-					//f[n].setPosition(newpos);
 										
 				}
 
