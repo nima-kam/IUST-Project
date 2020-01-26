@@ -2823,7 +2823,11 @@ int main()
 
 	while (window.isOpen())
 
-	{
+	{ 
+		if (isclose)//close the window if exit clicked in start menu.
+        {
+            window.close();
+        }
 
 		Vector2i pos = Mouse::getPosition(window);
 
@@ -2941,6 +2945,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 								}
 
@@ -2975,6 +2980,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 								}
 
@@ -3007,6 +3013,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 								}
 
@@ -3037,6 +3044,7 @@ int main()
 									move(str);
 
 									f[n].setPosition(newpos);
+									movement.Sound::play();
 
 
 									CounterOfMovement++;
@@ -3067,6 +3075,7 @@ int main()
 									move(str);
 
 									f[n].setPosition(newpos);
+									movement.Sound::play();
 
 									CounterOfMovement++;
 
@@ -3097,6 +3106,7 @@ int main()
 									move(str);
 
 									f[n].setPosition(newpos);
+									movement.Sound::play();
 
 									CounterOfMovement++;
 
@@ -3129,6 +3139,7 @@ int main()
 									move(str);
 
 									f[n].setPosition(newpos);
+									movement.Sound::play();
 
 									CounterOfMovement++;
 
@@ -3194,6 +3205,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 								}
 
@@ -3202,6 +3214,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3228,6 +3241,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 								}
 
@@ -3238,6 +3252,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3260,6 +3275,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 								}
 
@@ -3270,6 +3286,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3292,6 +3309,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 								}
 
@@ -3300,6 +3318,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3322,6 +3341,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 								}
 
@@ -3330,6 +3350,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3352,6 +3373,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 								}
 
@@ -3362,6 +3384,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3384,6 +3407,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
+									movement.play();
 
 								}
 
@@ -3394,6 +3418,7 @@ int main()
 									std::cout << "Wrong Move\n";
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 								}
 
@@ -3409,6 +3434,7 @@ int main()
 							std::cout << "Wrong Move\n";
 
 							f[n].setPosition(oldpos);
+							FAILURE.Sound::play();
 						}
 					}
 
