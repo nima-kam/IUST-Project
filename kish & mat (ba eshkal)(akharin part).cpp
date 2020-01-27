@@ -6801,7 +6801,154 @@ int mat(int positionxNewKing, int positionyNewKing, std::string position[], int 
 
 
 
+int changeshape(Sprite pawn,int number,int n)/*gets the pawn sprite and change it to another shape. 
+ put number 1 if it is white and 0 for black*/ 
+{
+	
+	Font h;//loading font.
 
+	h.loadFromFile("font/Hey Milenia Demo.otf");
+
+	Text question("which one do you want to add in game :",h,40) ;
+    question.setStyle(Text::Bold);
+	
+	question.setPosition(15,15);
+	question.setColor(Color::Green);
+
+	Text queen(" queen ",h,40);//set a text.
+
+	queen.setPosition(25,150);
+
+	Text rook("rook",h,40);
+
+	rook.setPosition(25,300);
+
+	Text knight("knight ",h,40);
+
+	knight.setPosition(225,150);
+
+	Text bishop("bishop",h,40); 
+
+	bishop.setPosition(225,300);
+
+	int shape ;
+	RenderWindow q(VideoMode(602,400),"* change *");
+	
+	while (q.isOpen())
+	{
+		Vector2i pos = Mouse::getPosition(q);//position of mouse
+		Event w;
+		while (q.pollEvent(w))
+		{
+			if (w.type == Event::MouseButtonPressed)
+			{
+				if (w.key.code == Mouse::Left)
+				{
+
+        		if (pos.x-25>0&&pos.x-25<100)//if mouse was on queen icon.
+				{
+					if ((pos.y-150) > 0 && (pos.y - 150) < 100)
+					{
+						shape=1;//queen
+						
+						sleep(seconds(0.5));
+						q.close();
+
+					}
+
+				}
+				if (pos.x-25>0&&pos.x-25<100)//if mouse was on rook icon.
+				{
+					if ((pos.y-300) > 0 && (pos.y - 300) < 100)
+					{
+						shape=2;//rook
+						
+
+						sleep(seconds(0.5));
+						q.close();
+
+					}
+
+				}
+
+				if (pos.x-225>0&&pos.x-225<100)//if mouse was on knight icon.
+				{
+					if ((pos.y-150) > 0 && (pos.y - 150) < 100)
+					{
+						shape=3;//knight
+						
+
+						sleep(seconds(0.5));
+						q.close();
+
+					}
+
+				}
+				if (pos.x-225>0&&pos.x-225<100)//if mouse was on bishop icon.
+				{
+					if ((pos.y-300) > 0 && (pos.y - 300) < 100)
+					{
+						shape=4;//bishop
+						
+
+						sleep(seconds(0.5));
+						q.close();
+
+					}
+
+				}	
+
+				}
+
+				
+			}
+			
+
+
+		}
+		
+
+		q.clear(Color::Magenta);
+
+		q.draw(question);
+		q.draw(queen);
+		q.draw(rook);
+		q.draw(bishop); 
+		q.draw(knight);
+
+		q.display();
+std::cout<<"#"<<shape<<" #"<<"\n";
+	}
+	switch (shape)
+		{
+		case 1:
+			//f[n].setTexture(qu[number]);
+			return 1;
+			break;
+		case 2:
+ 			//f[n].setTexture(ro[number]);
+			 return 2;
+		  	break;
+		case 3:
+			//f[n].setTexture(kn[number]);
+			return 3;
+		  	break;
+		case 4:
+		 	//pawn.setTexture(bi[number]);
+			return 4;
+		  	break;
+		
+		default:
+			break;
+		}
+
+return shape;
+
+}
+
+
+int shapeb[8]={0};
+int shape[8]={0};
 
 
 
@@ -6810,6 +6957,16 @@ int main()
 
 
 {
+
+    Texture sh,ro[2],qu[2],bi[2],kn[2];//photo of elements.
+    ro[0].loadFromFile("image/blackRook.png");
+	qu[0].loadFromFile("image/blackQueen.png");
+	bi[0].loadFromFile("image/blackBishop.png");
+	kn[0].loadFromFile("image/blackKnight.png");
+	ro[1].loadFromFile("image/whiteRook.png");
+	qu[1].loadFromFile("image/whiteQueen.png");
+	bi[1].loadFromFile("image/whiteBishop.png");
+	kn[1].loadFromFile("image/whiteKnight.png");
 
 	//start page. 
 
@@ -6839,7 +6996,7 @@ int main()
 
 
 
-	background.loadFromFile("images/woodenbackground[1].jpg");
+	background.loadFromFile("images/woodenbackground.jpg");
 
 
 
@@ -7465,6 +7622,7 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 
 
@@ -7533,6 +7691,7 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 
 
@@ -7553,6 +7712,7 @@ int main()
 
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 
 
@@ -7597,6 +7757,7 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 
 
@@ -7663,6 +7824,7 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 								}
 
@@ -7721,6 +7883,7 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 
 
@@ -7754,9 +7917,28 @@ int main()
 
 							{
 
+								int a;
+								//shape of pawns after and before reaching end
+								switch (shape[n-16])
+								{
+								case 0: a = sarbaz(str, position, 1);
+									
+									break;
+								case 1: a = vazir(str, position);
+									
+									break;
+								case 2: a = rook(str, position,n);
+									
+									break;
+								case 3: a = asb(str,position,n);
+									
+									break;	
+								case 4: a = fil(str, position);
+									
+									break;
 
-
-								int a = sarbaz(str, position, 1);
+								}
+								;
 
 
 
@@ -7781,8 +7963,11 @@ int main()
 
 
 									CounterOfMovement++;
-
-
+									movement.Sound::play();
+									 if (newpos.y< size)
+									{
+										a=2;
+									}
 
 								}
 
@@ -7802,8 +7987,12 @@ int main()
 
 									f[n].setPosition(oldpos);
 
+								}
+								if(a==2 && shape[n-16]==0)
+								{
+									shape[n-16]=changeshape(f[n],1,n);//
 
-
+									
 								}
 
 
@@ -7820,7 +8009,27 @@ int main()
 
 
 
-								int a = sarbaz(str, position, 0);
+								int a;
+								//shape of pawns after and before reaching end
+								switch (shapeb[n-8])
+								{
+								case 0: a = sarbaz(str, position, 0);
+									
+									break;
+								case 1: a = vazir(str, position);
+									
+									break;
+								case 2: a = rook(str, position,n);
+									
+									break;
+								case 3: a = asb(str,position,n);
+									
+									break;	
+								case 4: a = fil(str, position);
+									
+									break;
+
+								}
 
 
 
@@ -7845,17 +8054,16 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
+									if (newpos.y> size*7)
+									{
+										a=2;
+									}
 
 
 
 								}
-
-
-
 								else
-
-
-
 								{
 
 
@@ -7865,22 +8073,19 @@ int main()
 
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 
 
 								}
+								 if(a==2&& shapeb[n-8]==0)
+								{
+									shapeb[n-8]=changeshape(f[n],0,n);//
 
-
-
-
-
-
+									
+								}
 
 							}
-
-
-
-
 
 
 
@@ -7893,6 +8098,7 @@ int main()
 
 
 							f[n].setPosition(oldpos);
+							FAILURE.Sound::play();
 
 
 
@@ -7971,6 +8177,7 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 
 
@@ -7987,6 +8194,7 @@ int main()
 
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 
 
@@ -8039,6 +8247,7 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 
 
@@ -8059,6 +8268,7 @@ int main()
 
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 
 
@@ -8099,6 +8309,7 @@ int main()
 
 
 									f[n].setPosition(newpos);
+									movement.Sound::play();
 
 
 
@@ -8123,6 +8334,7 @@ int main()
 
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 
 
@@ -8167,6 +8379,7 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 
 
@@ -8183,6 +8396,7 @@ int main()
 
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 
 
@@ -8227,6 +8441,7 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
 
 
 
@@ -8243,6 +8458,7 @@ int main()
 
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 
 
@@ -8262,13 +8478,30 @@ int main()
 
 
 
-								int a = sarbaz(str, position, 1);
+								 int a;
+								//shape of pawns after and before reaching end
+								switch (shape[n-16])
+								{
+								case 0: a = sarbaz(str, position, 1);
+									
+									break;
+								case 1: a = vazir(str, position);
+									
+									break;
+								case 2: a = rook(str, position,n);
+									
+									break;
+								case 3: a = asb(str,position,n);
+									
+									break;	
+								case 4: a = fil(str, position);
+									
+									break;
 
+								}
 
 
 								if (a == 1)
-
-
 
 								{
 
@@ -8287,12 +8520,12 @@ int main()
 
 
 									CounterOfMovement++;
-
-
-
+									movement.Sound::play();
+									  if (newpos.y< size)
+									{
+										a=2;
+									}
 								}
-
-
 
 								else
 
@@ -8307,10 +8540,18 @@ int main()
 
 
 									f[n].setPosition(oldpos);
+									FAILURE.Sound::play();
 
 
 
 								}
+								if(a==2 && shape[n-16]==0)
+								{
+									shape[n-16]=changeshape(f[n],1,n);//
+
+									
+								}
+
 
 
 
@@ -8326,10 +8567,25 @@ int main()
 
 
 
-								int a = sarbaz(str, position, 0);
-
-
-
+								 int a;
+								//shape of pawns after and before reaching end
+								switch (shapeb[n-8])
+								{
+								case 0: a = sarbaz(str, position, 0);
+									
+									break;
+								case 1: a = vazir(str, position);
+									
+									break;
+								case 2: a = rook(str, position,n);
+									
+									break;
+								case 3: a = asb(str,position,n);
+									
+									break;	
+								case 4: a = fil(str, position);
+									
+									break;
 								if (a == 1)
 
 
@@ -8351,6 +8607,11 @@ int main()
 
 
 									CounterOfMovement++;
+									movement.Sound::play();
+									if (newpos.y> size*7)
+									{
+										a=2;
+									}
 
 
 
@@ -8375,10 +8636,12 @@ int main()
 
 
 								}
+								if(a==2&& shapeb[n-8]==0)
+								{
+									shapeb[n-8]=changeshape(f[n],0,n);//
 
-
-
-
+									
+								}
 
 
 
@@ -9826,11 +10089,55 @@ int main()
 
 
 
-		}
+			}}
 
 
 		if (isMove) f[n].setPosition(pos.x - dx, pos.y - dy);
 
+		for (int i = 0; i < 8; i++)//change the pawn shape.
+        {
+            if (shape[i]!=0)
+            {
+                if (shape[i]==1)
+                {
+                    f[i+16].setTexture(qu[1]);
+                }
+                if (shape[i]==2)
+                {
+                    f[i+16].setTexture(ro[1]);
+                }
+                if (shape[i]==3)
+                {
+                    f[i+16].setTexture(kn[1]);
+                }
+                if (shape[i]==4)
+                {
+                    f[i+16].setTexture(bi[1]);
+                }
+                  
+            }
+            if (shapeb[i]!=0)
+            {
+                if(shapeb[i]==1)
+                {
+                    f[i+8].setTexture(qu[0]);
+                }
+                if(shapeb[i]==2)
+                {
+                    f[i+8].setTexture(ro[0]);
+                }
+                if(shapeb[i]==3)
+                {
+                    f[i+8].setTexture(kn[0]);
+                }
+                if(shapeb[i]==4)
+                {
+                    f[i+8].setTexture(bi[0]);
+                }
+            }
+            
+
+        }
 
 
 
@@ -9838,8 +10145,6 @@ int main()
 
 
 		window.clear();
-
-
 
 		window.draw(sboard);
 

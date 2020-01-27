@@ -6086,7 +6086,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
-                                    if (newpos.y< size)
+                                    if (newpos.y < size)
 									{
 										a=2;
 									}
@@ -6154,7 +6154,7 @@ int main()
 									f[n].setPosition(newpos);
 
 									CounterOfMovement++;
-                                    if (newpos.y< size)
+                                    if (newpos.y> size*7)
 									{
 										a=2;
 									}
