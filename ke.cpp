@@ -7600,6 +7600,7 @@ if (isclose==1)
 									f[n].setPosition(oldpos);
 
 
+                                    FAILURE.Sound::play();
 
 								}
 
@@ -8295,7 +8296,7 @@ if (isclose==1)
                                     FAILURE.Sound::play();
 
 								}
-                                if(a==2&& shapeb[n-8]==0)
+                                if(a==2 && shapeb[n-8]==0)
 								{
 									shapeb[n-8]=changeshape(f[n],0,n);//
 
@@ -8322,6 +8323,7 @@ if (isclose==1)
 
 
 							f[n].setPosition(oldpos);
+                            FAILURE.Sound::play();
 
 						}
 
